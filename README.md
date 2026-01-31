@@ -79,27 +79,24 @@ source .venv/bin/activate
 
 Create a `requirements.txt` file (or use the one provided) and install:
 
-```bash
+bash
 pip install fastapi uvicorn requests python-dotenv groq pydantic
 
-```
 
 ### 4. Configure Environment Variables
 
 Create a `.env` file in the root directory:
 
-```env
+env
 # Get your key from [https://console.groq.com/keys](https://console.groq.com/keys)
 GROQ_API_KEY=gsk_your_groq_api_key_here
 
-```
 
 ### 5. Run the Server
 
-```bash
+bash
 uvicorn main:app --reload
 
-```
 
 The server will start at `http://127.0.0.1:8000`.
 
@@ -113,7 +110,7 @@ This is the main entry point for the scammer's messages.
 
 **Request Payload:**
 
-```json
+json
 {
   "sessionId": "unique-session-id-123",
   "text": "URGENT: Your account is blocked. Send OTP.",
@@ -131,7 +128,7 @@ This is the main entry point for the scammer's messages.
 
 **Response Payload:**
 
-```json
+json
 {
   "status": "success",
   "reply": "Arre beta, kindly have patience. My spectacles fell under the sofa. One minute."
@@ -145,7 +142,7 @@ This is the main entry point for the scammer's messages.
 
 When the system detects a scam, it silently sends this report to the authorities:
 
-```json
+json
 {
   "sessionId": "unique-session-id-123",
   "scamDetected": true,
@@ -158,7 +155,7 @@ When the system detects a scam, it silently sends this report to the authorities
   "agentNotes": "Persona: Smart Indian Uncle (Girish). Status: Scammer is completely exhausted. Maximum delay achieved."
 }
 
-```
+
 
 ---
 
@@ -181,6 +178,5 @@ When the system detects a scam, it silently sends this report to the authorities
 
 *Built for the Hackathon 2026. Fighting scams, one samosa at a time.* 🥟
 
-```
 
 ```
