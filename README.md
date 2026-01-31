@@ -1,4 +1,4 @@
-```markdown
+markdown
 # 🛡️ Agentic Honeypot API: Project "Girish"
 
 > **An Autonomous, Context-Aware AI Honeypot designed to waste scammers' time using "Weaponized Incompetence."**
