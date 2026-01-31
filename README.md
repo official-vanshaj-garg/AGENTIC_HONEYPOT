@@ -1,6 +1,4 @@
-Here is the complete, professionally formatted `README.md` file. You can copy the code block below and paste it directly into your `README.md` file.
-
-```markdown
+markdown
 # 🛡️ Agentic Honeypot API: Project "Girish"
 
 > **An Autonomous, Context-Aware AI Honeypot designed to waste scammers' time using "Weaponized Incompetence."**
@@ -61,15 +59,14 @@ This system counters that with **Bureaucracy** and **Confusion**.
 ## 🚀 Installation & Setup
 
 ### 1. Clone the Repository
-```bash
+bash
 git clone [https://github.com/your-username/agentic-honeypot.git](https://github.com/your-username/agentic-honeypot.git)
 cd agentic-honeypot
 
-```
 
 ### 2. Create a Virtual Environment
 
-```bash
+bash
 python -m venv .venv
 # Activate:
 # Windows:
@@ -77,7 +74,6 @@ python -m venv .venv
 # Mac/Linux:
 source .venv/bin/activate
 
-```
 
 ### 3. Install Dependencies
 
