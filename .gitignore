@@ -1,0 +1,7 @@
+/.venv
+/AgenticAIHoneypot.pdf
+/Cyber_Fraud
+/fraud_messages.csv
+/requirements.txt
+/scam_dataset_500_balanced_safe.csv
+/unified_scam_detection_dataset.csv
