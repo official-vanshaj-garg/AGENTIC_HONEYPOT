@@ -120,7 +120,7 @@ def extract_and_report(session_id: str, history: List[MessageItem], latest_text:
     full_text = " ".join([m.text for m in history if m.text] + [latest_text])
 
     patterns = {
-    "upiIds": r'\b[a-zA-Z0-9.\-_]{2,64}@(upi|ybl|oksbi|okhdfcbank|okaxis|paytm|ibl)\b',
+    "upiIds": r'\b[a-zA-Z0-9.\-_]{2,64}@[a-zA-Z]{2,64}\b',
     "phoneNumbers": r'(?<!\d)(?:\+91|91)?[6-9]\d{9}(?!\d)',
     "bankAccounts": r'(?<!\d)\d{11,16}(?!\d)',
     "phishingLinks": r'\bhttps?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/\S*)?\b'
