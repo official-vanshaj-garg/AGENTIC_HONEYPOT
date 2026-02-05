@@ -19,8 +19,11 @@ while True:
 
     payload = {
         "sessionId": session_id,
-        "text": user_input,
-        "sender": "scammer",
+        "message": {
+            "sender": "scammer",
+            "text": user_input,
+            "timestamp": int(time.time())
+        },
         "conversationHistory": conversation_history
     }
 
@@ -51,4 +54,3 @@ while True:
         "text": reply,
         "timestamp": int(time.time())
     })
-
