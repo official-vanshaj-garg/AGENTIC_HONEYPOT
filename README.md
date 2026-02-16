@@ -598,18 +598,3 @@ This project was built for the **India AI Impact Buildathon 2026** organized by 
 <p align="center">
   <b>Fighting scams. Extracting intelligence. Wasting scammer time.</b>
 </p>
-
-## 👤 Contact & Developer
-
-**Vanshaj**
-
-* 📧 **Email:** [official.vanshaj.garg@gmail.com](mailto:official.vanshaj.garg@gmail.com)
-* 🔗 **LinkedIn:** [linkedin.com/in/vanshajgargg](https://www.linkedin.com/in/vanshajgargg)
-
----
-
-*Built for the Hackathon 2026. Fighting scams, one samosa at a time.* 🥟
-
-```
-
-```
