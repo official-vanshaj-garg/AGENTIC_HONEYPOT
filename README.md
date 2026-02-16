@@ -241,6 +241,11 @@ The extraction runs on the **complete conversation text** (all historical messag
   "agentNotes": "Scammer used urgency, impersonation, and escalation tactics."
 }
 ```
+## API Endpoint
+- URL: https://your-deployed-url.com/honeypot
+- Method: POST
+- Authentication: x-api-key header
+
 
 ---
 
@@ -292,38 +297,21 @@ Scammers operate on **urgency** and **fear** — they demand immediate action. N
 ## 📁 Project Structure
 
 ```
-Agentic-Honey-Pot-for-Scam-Detection-Intelligence-Extraction/
+your-repo/
 │
-├── README.md                          # This file — project documentation
-├── .gitignore                         # Git ignore rules
+├── README.md                     # Project documentation
+├── requirements.txt              # Python dependencies
+├── .env.example                  # Environment variable template
 │
-├── honeypot-api/                      # 🔥 Core API source code
-│   ├── main.py                        # Main FastAPI application (267 lines)
-│   │                                  #   ├── Configuration & Environment Setup
-│   │                                  #   ├── Pydantic Data Models
-│   │                                  #   ├── Scam Intent Detection (is_scam_intent)
-│   │                                  #   ├── Intelligence Extraction (extract_and_report)
-│   │                                  #   ├── LLM Response Generation (generate_honeypot_response)
-│   │                                  #   └── API Endpoint (POST /api/detect)
-│   │
-│   ├── requirements.txt               # Python dependencies
-│   ├── .env                           # Environment variables (gitignored)
-│   ├── .gitignore                     # API-specific git ignores
-│   │
-│   └── tests/                         # 🧪 Test suite
-│       ├── test_api.py                # Sample scam payload for testing
-│       ├── test_chat.py               # Interactive multi-turn chat tester
-│       ├── trigger_spy.py             # Single-shot scam trigger with auth
-│       ├── verify_system.py           # Full pre-deployment verification suite
-│       └── list_model.py              # Utility to list available Gemini models
+├── src/                          # Source code
+│   ├── main.py                   # Main FastAPI API implementation
+│   ├── honeypot_agent.py         # Honeypot logic (LLM + engagement)
+│   └── intelligence_engine.py    # Extraction & reporting logic
 │
-├── Technical Docs/                    # 📄 Hackathon documentation
-│   ├── Brats PPT India AI Impact Buildathon.pptx
-│   ├── Agentic Honey-Pot Sample Scenarios for Evaluation.pdf
-│   ├── Honeypot API Evaluation System Documentation.pdf
-│   └── ... (screenshots, results, reference docs)
+├── tests/                        # Testing utilities
 │
-└── test_results/                      # 📊 Evaluation test results
+└── docs/
+    └── architecture.md           # System architecture explanation
 ```
 
 ---
