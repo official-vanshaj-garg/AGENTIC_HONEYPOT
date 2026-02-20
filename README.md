@@ -311,21 +311,6 @@ The entire API is contained in a single, well-organized `main.py` file (614 line
 | **9. Endpoint** | 529-607 | API handler | The main `/api/detect` POST endpoint that orchestrates everything |
 | **10. Run** | 609-614 | Server startup | Starts the Uvicorn server |
 
-Additionally, the `app/` directory contains a **modular version** of the same logic, split into individual files for maintainability:
-
-| File | Purpose |
-|------|---------|
-| `config.py` | Environment variables and app configuration |
-| `schemas.py` | Pydantic request/response models |
-| `patterns.py` | All regex patterns for entity extraction |
-| `scoring.py` | Scam scoring engine |
-| `extraction.py` | Intelligence extraction pipeline |
-| `replies.py` | LLM response generation and sanitization |
-| `llm_client.py` | Groq API client wrapper |
-| `session_store.py` | Session state management |
-| `state.py` | Global state variables |
-| `service.py` | Business logic orchestration |
-| `models.py` | Internal data models |
 
 ---
 
@@ -533,32 +518,16 @@ Agentic-Honey-Pot-for-Scam-Detection-Intelligence-Extraction/
 │   │   ├── Section 9: Endpoint         #   POST /api/detect handler
 │   │   └── Section 10: Run             #   Server startup
 │   │
-│   ├── app/                            # 📦 Modular version (same logic, split files)
-│   │   ├── config.py                   #   Configuration & environment variables
-│   │   ├── schemas.py                  #   Pydantic models
-│   │   ├── patterns.py                 #   Regex patterns
-│   │   ├── scoring.py                  #   Scam scoring engine
-│   │   ├── extraction.py               #   Intelligence extraction
-│   │   ├── replies.py                  #   LLM response generation
-│   │   ├── llm_client.py               #   Groq API client
-│   │   ├── session_store.py            #   Session management
-│   │   ├── state.py                    #   Global state
-│   │   ├── service.py                  #   Business logic
-│   │   └── models.py                   #   Data models
-│   │
 │   ├── requirements.txt                # Python dependencies
 │   ├── .env                            # Environment variables (gitignored)
 │   ├── .gitignore                      # API-specific gitignore
 │   │
-│   └── tests/                          # 🧪 Comprehensive test suite
+│   └── tests/                          # 🧪 Test suite
 │       ├── test_api.py                 # Sample payload for quick testing
 │       ├── test_chat.py                # Interactive multi-turn chat tester
 │       ├── trigger_spy.py              # Single-shot authenticated test
 │       ├── verify_system.py            # Full pre-deployment verification
-│       ├── gpt_test.py                 # Extended GPT-based test scenarios
 │       ├── offline_test.py             # Offline test runner
-│       ├── testings.py                 # Comprehensive scenario testing
-│       ├── xx.py                       # Additional test utilities
 │       ├── list_model.py               # Available model checker
 │       ├── honeypot_test_report.json   # Test result records
 │       ├── honeypot_test_report_v2.json# Updated test results
