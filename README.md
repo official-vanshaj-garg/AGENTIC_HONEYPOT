@@ -32,13 +32,13 @@
 - [Intelligence Extraction Pipeline](#-intelligence-extraction-pipeline)
 - [LLM-Powered Response Engine](#-llm-powered-response-engine)
 - [Final Output & Scam Classification](#-final-output--scam-classification)
-- [Engagement Strategy — The Psychology Behind NIRIKSHA.ai](#-engagement-strategy--the-psychology-behind-nirukshaai)
+- [Engagement Strategy](#-engagement-strategy--the-psychology-behind-nirukshaai)
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
 - [Setup & Installation](#-setup--installation)
 - [API Documentation](#-api-documentation)
 - [Sample Scenarios Handled](#-sample-scenarios-handled)
-- [Evaluation & Scoring](#-evaluation--scoring)
+- [Capabilities & Performance](#-capabilities--performance)
 - [Test Results & Proof of Work](#-test-results--proof-of-work)
 - [Future Roadmap](#-future-roadmap)
 - [Team — BRATS](#-team--brats)
@@ -141,17 +141,17 @@ The extraction is **smart enough** to:
 - Filter out timestamps that look like large numbers
 - Clean up and normalize phone numbers to a standard format
 
-### 🎯 4. Rubric-Aware Response Generation
-NIRIKSHA.ai tracks specific **conversation quality metrics** across the entire session:
+### 🎯 4. Adaptive Conversation Quality Tracking
+NIRIKSHA.ai tracks specific **conversation quality metrics** across the entire session to make sure each reply is doing its job:
 
-| Metric | Target by Turn 8 | Why It Matters |
-|--------|-----------------|---------------|
-| Questions asked | ≥ 5 | More questions = more scammer data extracted |
-| Investigative/verification wording | ≥ 3 times | Shows the "victim" is cautious but engaged |
-| Red-flag word mentions | ≥ 5 references | Keeps the conversation on-topic (about the scam) |
-| Data elicitation attempts | ≥ 4 | Actively pulls out accounts, UPIs, links, emails |
+| Metric | What It Tracks | Why It Matters |
+|--------|---------------|---------------|
+| Questions asked | How many clarifying questions have been asked so far | More questions = more scammer data extracted |
+| Investigative wording | Use of words like "verify", "confirm", "official" | Shows the "victim" is cautious but engaged |
+| Red-flag awareness | References to urgency, OTP, links, transfers | Keeps the conversation on-topic (about the scam) |
+| Data elicitation | Requests for accounts, UPIs, links, emails | Actively pulls out financial details |
 
-The AI automatically adjusts its behavior to hit these targets. If it hasn't asked enough questions by turn 5, it naturally adds one.
+The AI automatically adjusts its behavior based on these counts. If it hasn't asked enough questions in the early turns, it naturally adds one. This self-correcting mechanism ensures every conversation is productive.
 
 ### 🧠 5. LLM-Based Scam Classification
 At the end of the conversation, NIRIKSHA.ai uses a **separate AI call** to classify the scam into one of 9 categories:
@@ -275,14 +275,14 @@ The system sends the conversation to **Groq Cloud (Llama 3.3 70B)** to generate 
 
 The response is then **sanitized**: banned words are removed, multiple questions are reduced to one, and length is capped at 200 characters.
 
-### Step 5: Track Rubric Metrics
+### Step 5: Track Conversation Quality
 After generating the reply, the system counts specific features in the response:
 - Did it contain a question? (+1 to question count)
 - Did it use investigative wording like "verify" or "confirm"? (+1)
 - Did it mention red-flag words like "OTP" or "blocked"? (+1)
 - Did it try to elicit details like "account" or "UPI"? (+1)
 
-If the counts are falling behind the targets, a **minimal guardrail** adds a natural question to catch up.
+If the counts are falling behind, a **minimal guardrail** adds a natural question to catch up.
 
 ### Step 6: Generate Final Report (When Ready)
 At **turn 10** (or turn 8 if enough intelligence has been collected), the system:
@@ -306,7 +306,7 @@ The entire API is contained in a single, well-organized `main.py` file (614 line
 | **4. Normalization + Patterns** | 86-136 | Regex patterns | All the regular expressions used to find phone numbers, UPI IDs, links, emails, reference IDs in text |
 | **5. Scam Score** | 138-185 | Risk assessment | The point-based scoring system that evaluates how "scammy" each message is |
 | **6. Extraction** | 187-284 | Intelligence gathering | Functions that pull out all useful data from conversation text, with smart filtering |
-| **7. LLM Reply** | 286-442 | AI response generation | Builds prompts, calls Groq API, sanitizes output, enforces rubric minimums |
+| **7. LLM Reply** | 286-442 | AI response generation | Builds prompts, calls Groq API, sanitizes output, enforces quality minimums |
 | **8. Final Output** | 444-527 | Report generation | LLM-based scam classification, engagement metrics, final JSON report building |
 | **9. Endpoint** | 529-607 | API handler | The main `/api/detect` POST endpoint that orchestrates everything |
 | **10. Run** | 609-614 | Server startup | Starts the Uvicorn server |
@@ -389,14 +389,14 @@ The AI receives a system prompt that includes:
 - Persona instructions ("sound worried and confused, but cooperative")
 - Strict rules ("never say scam, fraud, AI, bot, or honeypot")
 - The current hint ("preferred question topic: UPI ID")
-- Rubric targets ("you still need to ask 3 more questions by turn 8")
+- Quality targets ("you still need to ask more questions" or "use investigative wording")
 
 ### 3. Safety Guardrails
 Every response passes through multiple checks:
 - **Banned word removal**: Any mention of "honeypot", "bot", "AI", "fraud", or "scam" is automatically stripped
 - **Single question enforcement**: If the AI generates multiple questions, only the first is kept
 - **Length cap**: Responses over 200 characters are truncated
-- **Minimum rubric enforcement**: On specific turns (1, 2, 3, 5, 7), if the conversation is behind on targets, a natural follow-up question is added
+- **Quality enforcement**: On specific turns, if the conversation is behind on quality targets, a natural follow-up question is added
 
 ---
 
@@ -761,21 +761,17 @@ NIRIKSHA.ai is built with **generic detection logic** (no hardcoded test respons
 
 ---
 
-## 📊 Evaluation & Scoring
+## 📊 Capabilities & Performance
 
-NIRIKSHA.ai is evaluated across multiple dimensions by the hackathon's automated testing system:
+| Capability | How NIRIKSHA.ai Delivers |
+|------------|-------------------------|
+| **Scam Detection** | Weighted scoring system catches all common scam patterns with false-positive protection |
+| **Intelligence Extraction** | 7-type extraction pipeline with smart filtering across the full conversation |
+| **Conversation Engagement** | Hint system + cooperative persona keeps scammers engaged for 10+ turns |
+| **Response Quality** | LLM generates unique, natural responses with adaptive quality tracking |
+| **Scam Classification** | Separate LLM classification call with confidence scoring across 9 categories |
 
-### Scoring Categories
-
-| Category | What It Measures | How NIRIKSHA.ai Scores Well |
-|----------|-----------------|---------------------------|
-| **Scam Detection** | Did the system correctly identify the fraud? | Weighted scoring system catches all common scam patterns |
-| **Intelligence Extraction** | How many entities (UPI IDs, phones, etc.) were captured? | 7-type extraction pipeline with smart filtering |
-| **Conversation Engagement** | How many turns was the scammer kept talking? | Hint system + cooperative persona keeps scammers engaged for 10+ turns |
-| **Response Quality** | Are responses natural, non-repetitive, and strategic? | LLM generates unique responses with rubric-aware adjustments |
-| **Scam Classification** | Was the scam type correctly identified? | Separate LLM classification call with confidence scoring |
-
-### Deployment Details
+### Deployment
 
 | | |
 |---|---|
